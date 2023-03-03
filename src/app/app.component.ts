@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment.development';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Crawl Jobs';
+  public name = "property from parent component(App)";
+  public message="";
 }
