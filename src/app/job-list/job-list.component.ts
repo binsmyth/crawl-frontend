@@ -22,7 +22,7 @@ export class JobListComponent {
   environment = environment; // sharing environment variable to template files
   console = console; // for debuggin in template
   ngOnInit(){
-    this._jobService.getEmployees().subscribe(job => this.joblist = job);
+    this._jobService.getJobs().subscribe(job => this.joblist = job);
   }
   next(){
     this.first = this.first + this.rows;

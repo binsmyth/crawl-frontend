@@ -8,14 +8,14 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class JobService {
-  private _viewseekurl: string = environment.apiUrl + "/view/seek";
+  private _viewseekurl: string = environment.apiUrl + "/view";
   constructor(private http: HttpClient) { }
 
   errorHandler(error:HttpErrorResponse, caught:Observable<any>){
     console.log(error.message, 'errorrr');
     return of();
   }
-  getEmployees():Observable<IJob[]>{
+  getJobs():Observable<IJob[]>{
     return this.http.get<IJob[]>(this._viewseekurl)
                     .pipe(map(res => res),catchError(this.errorHandler))
   }
