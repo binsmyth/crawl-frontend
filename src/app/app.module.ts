@@ -5,12 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
-import { EmployeeService } from './employee.service';
+import { JobListComponent } from './job-list/job-list.component';
+import { JobService } from './job.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 
 
 
@@ -18,8 +18,7 @@ import { ButtonModule } from 'primeng/button';
   declarations: [
     AppComponent,
     TestComponent,
-    EmployeeListComponent,
-    EmployeeDetailComponent
+    JobListComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +27,10 @@ import { ButtonModule } from 'primeng/button';
     HttpClientModule,
     BrowserAnimationsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    DialogModule
   ],
-  providers: [EmployeeService],
+  providers: [JobService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

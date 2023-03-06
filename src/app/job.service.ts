@@ -2,20 +2,25 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import { IEmployee } from './employee';
+import { IJob } from './job';
+import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeService {
-  private _url: string = "http://localhost:5002/view/seek";
+export class JobService {
+  private _viewseekurl: string = environment.apiUrl + "/view/seek";
   constructor(private http: HttpClient) { }
 
   errorHandler(error:HttpErrorResponse, caught:Observable<any>){
     console.log(error.message, 'errorrr');
     return of();
   }
-  getEmployees():Observable<IEmployee[]>{
-    return this.http.get<IEmployee[]>(this._url)
+  getEmployees():Observable<IJob[]>{
+    return this.http.get<IJob[]>(this._viewseekurl)
                     .pipe(map(res => res),catchError(this.errorHandler))
+  }
+  getJobDetail(url: string){
+    return this.http.get(url,{responseType: 'text'})
+                    .pipe(map(res=>res),catchError(this.errorHandler))
   }
 }
