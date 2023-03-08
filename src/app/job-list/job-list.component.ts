@@ -9,9 +9,14 @@ import { IJob } from '../job';
   styleUrls: ['./job-list.component.scss']
 })
 export class JobListComponent {
+i: any;
   constructor(private _jobService: JobService){}
   joblist!:IJob[];
   rootsite = environment.apiUrl + "/view/detail"
+  keywords:any = {}; // I don't understand how come this works.
+  showKeyword!:boolean;
+  tab1:boolean[] =[];
+  tab2:boolean[]=[];
 
   //For tables
   first = 0;
@@ -42,5 +47,12 @@ export class JobListComponent {
   showDialog(url: string){
     this._jobService.getJobDetail(url).subscribe(description => this.description = description);
     this.display = true;  
+  }
+  showKeywords(index:number, url:string){
+    this.tab1[index] = true;
+    this._jobService.getTechKeywords(url).subscribe((keywords) => {
+      this.keywords[index] = JSON.parse(keywords).filter((value:any,index:any,array:any)=>array.indexOf(value) === index);
+      this.showKeyword = true;
+    });
   }
 }

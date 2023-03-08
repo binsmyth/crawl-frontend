@@ -8,10 +8,11 @@
             <th>Site</th>
             <th>Url</th>
             <th>Date</th>
+            <th>Tech Stack Detected</th>
             <th>Details</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-joblist>
+    <ng-template pTemplate="body" let-joblist let-rowIndex="rowIndex">
         <tr>
             <td>{{joblist.company}}</td>
             <td>{{joblist.title}}</td>
@@ -20,6 +21,37 @@
                 <a href="{{rootsite + '\?href=' + joblist.href + '&site=' + joblist.site}}">{{joblist.href}}</a>&nbsp;
             </td>
             <td>{{joblist.crawled_date.seconds * 1000 | date: 'MM/dd/yyyy'}}</td>
+            <td>
+                <div *ngIf="!joblist.techkeywords">
+                    <div *ngIf="tab1[rowIndex]">
+                        <div *ngFor="let keyword of (keywords[rowIndex]?.slice(0,5))" (click)="oq.toggle($event)">
+                            {{keyword}}
+                        </div>
+                        <p-overlayPanel #oq>
+                            <ng-template pTemplate>
+                                <div *ngFor="let keyword of keywords[rowIndex]">
+                                    {{keyword}}
+                                </div>
+                            </ng-template>
+                        </p-overlayPanel>
+                    </div>
+                    <div *ngIf="!tab1[rowIndex]">
+                        <button pButton (click)="showKeywords(rowIndex, environment.apiUrl + '/get/tech-stack?href=' + joblist.href + '&site=' + joblist.site)" type="button" class="p-button-rounded p-button-text" label="get"></button>
+                    </div>
+                </div>
+                <div *ngIf="joblist.techkeywords">
+                    <div *ngFor="let techkeywords of joblist.techkeywords?.slice(0,5)" (click)="op.toggle($event)">
+                        {{techkeywords}}
+                    </div>
+                    <p-overlayPanel #op>
+                        <ng-template pTemplate>
+                            <div *ngFor="let techkeywords of joblist.techkeywords">
+                                {{techkeywords}}
+                            </div>
+                        </ng-template>
+                    </p-overlayPanel>
+                </div>
+            </td>
             <td>
                 <button pButton pRipple type="button" (click)="showDialog(environment.apiUrl + '/view/detail?href=' + joblist.href + '&site=' + joblist.site)" icon="pi pi-external-link" class="p-button-rounded p-button-text"></button>
             </td>

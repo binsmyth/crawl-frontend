@@ -6,4 +6,5 @@ export interface IJob{
     site: "string";
     title: "string";
     date: any;
+    
 }

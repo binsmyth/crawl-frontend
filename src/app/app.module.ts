@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 
 
@@ -28,7 +29,8 @@ import { DialogModule } from 'primeng/dialog';
     BrowserAnimationsModule,
     TableModule,
     ButtonModule,
-    DialogModule
+    DialogModule,
+    OverlayPanelModule
   ],
   providers: [JobService],
   bootstrap: [AppComponent]
