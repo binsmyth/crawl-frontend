@@ -1,15 +1,36 @@
-<h1>Job Details</h1>
-<p-table [value]="joblist" [tableStyle]="{'min-width': '20rem', 'max-width':'50rem'}" styleClass="p-datatable-sm" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" 
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+<p-table 
+    [value]="joblist"
+    [tableStyle]="{'min-width': '20rem', 'max-width':'60rem'}" 
+    (onFilter)="onChangeFilter($event)"
+    (sortFunction)="customSort($event)"
+    [customSort]="true"
+    [globalFilterFields]="['company', 'title', 'site','crawled_date', 'techkeywords']"
+    styleClass="p-datatable-striped p-datatable-sm p-datatable-gridlines" 
+    [paginator]="true" 
+    [rows]="5" 
+    [showCurrentPageReport]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+>
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="company">Company</th>
-            <th>Title</th>
-            <th>Site</th>
-            <th>Url</th>
-            <th>Date</th>
-            <th>Tech Stack Detected</th>
+            <th pSortableColumn="company"><p-sortIcon field="company"></p-sortIcon>Company</th>
+            <th pSortableColumn="title"><p-sortIcon field="title"></p-sortIcon>Title</th>
+            <th pSortableColumn="site"><p-sortIcon field="site"></p-sortIcon>Site</th>
+            <th pSortableColumn="crawled_date"><p-sortIcon field="crawled_date'"></p-sortIcon>Date(dd/mm/yyyy)</th>
+            <th pSortableColumn="stack">Tech Stack Detected</th>
             <th>Details</th>
+        </tr>
+        <tr>
+            <th><p-columnFilter width="50rem" type="text" field="company" ></p-columnFilter></th>
+            <th><p-columnFilter type="text" field="title"></p-columnFilter></th>
+            <th><p-columnFilter type="text" field="site"></p-columnFilter></th>
+            <th>
+                <p-columnFilter type="text" field="crawled_date" [matchMode]="'date-filter'">
+
+                </p-columnFilter>
+            </th>
+            <th><p-columnFilter type="text" field="techkeywords"></p-columnFilter></th>
+            <th>&nbsp;</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-joblist let-rowIndex="rowIndex">
@@ -17,12 +38,9 @@
             <td>{{joblist.company}}</td>
             <td>{{joblist.title}}</td>
             <td>{{joblist.site}}</td>
+            <td>{{joblist.crawled_date.seconds * 1000 | date: 'dd/MM/yyyy'}}</td>
             <td>
-                <a href="{{rootsite + '\?href=' + joblist.href + '&site=' + joblist.site}}">{{joblist.href}}</a>&nbsp;
-            </td>
-            <td>{{joblist.crawled_date.seconds * 1000 | date: 'MM/dd/yyyy'}}</td>
-            <td>
-                <div *ngIf="!joblist.techkeywords">
+                <div *ngIf="!joblist.techkeywords" class="tech-keywords">
                     <div *ngIf="tab1[rowIndex]">
                         <div *ngFor="let keyword of (keywords[rowIndex]?.slice(0,5))" (click)="oq.toggle($event)">
                             {{keyword}}
@@ -36,10 +54,10 @@
                         </p-overlayPanel>
                     </div>
                     <div *ngIf="!tab1[rowIndex]">
-                        <button pButton (click)="showKeywords(rowIndex, environment.apiUrl + '/get/tech-stack?href=' + joblist.href + '&site=' + joblist.site)" type="button" class="p-button-rounded p-button-text" label="get"></button>
+                        <button pButton (click)="showKeywords(rowIndex, environment.apiUrl + '/get/tech-stack?href=' + joblist.href + '&site=' + joblist.site)" type="button" class="p-button-rounded p-button-text" label="Click to get stack"></button>
                     </div>
                 </div>
-                <div *ngIf="joblist.techkeywords">
+                <div *ngIf="joblist.techkeywords" class="tech-keywords">
                     <div *ngFor="let techkeywords of joblist.techkeywords?.slice(0,5)" (click)="op.toggle($event)">
                         {{techkeywords}}
                     </div>
@@ -53,12 +71,12 @@
                 </div>
             </td>
             <td>
-                <button pButton pRipple type="button" (click)="showDialog(environment.apiUrl + '/view/detail?href=' + joblist.href + '&site=' + joblist.site)" icon="pi pi-external-link" class="p-button-rounded p-button-text"></button>
+                <button pButton pRipple type="button" (click)="showDialog(joblist.company, environment.apiUrl + '/view/detail?href=' + joblist.href + '&site=' + joblist.site)" icon="pi pi-external-link" class="p-button-rounded p-button-text"></button>
             </td>
         </tr>
     </ng-template>
 </p-table>
-<p-dialog header="Description" [(visible)]="display">
+<p-dialog header={{company}} [resizable]= "true" [(visible)]="display" [style]="{width:'50vw'}">
     <div [innerHTML]="description"></div>
 </p-dialog>
 

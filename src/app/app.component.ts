@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -11,4 +11,9 @@ export class AppComponent {
   title = 'Crawl Jobs';
   public name = "property from parent component(App)";
   public message="";
+  no_of_company:number =0;
+
+  get_no_of_company(rowLength:number){
+    this.no_of_company = rowLength;
+  }
 }
