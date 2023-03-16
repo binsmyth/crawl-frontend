@@ -2,7 +2,7 @@
     <h1>{{ title }}</h1>
     {{message}}
     <!-- getting no of company from child component(job-list) -->
-    {{no_of_company}} 
+    <div>No. of company displayed : {{no_of_company}}</div>
     <!-- <app-test (childEvent)="message=$event" [parentData]="name"></app-test> -->
     <app-employee-list (no_of_company_ItemEvent)="get_no_of_company($event)"></app-employee-list>
     <app-chart></app-chart>
