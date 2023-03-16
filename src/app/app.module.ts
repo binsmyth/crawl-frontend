@@ -12,6 +12,9 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {ChartModule} from 'primeng/chart';
+import { ChartComponent } from './chart/chart.component';
+import {InputTextModule} from 'primeng/inputtext';
 
 
 
@@ -19,7 +22,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
   declarations: [
     AppComponent,
     TestComponent,
-    JobListComponent
+    JobListComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     TableModule,
     ButtonModule,
     DialogModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ChartModule,
+    InputTextModule
   ],
   providers: [JobService],
   bootstrap: [AppComponent]

@@ -13,9 +13,10 @@ export class JobListComponent {
 i: any;
   constructor(private _jobService: JobService, private filterService:FilterService){}
   joblist!:IJob[];
-  rootsite = environment.apiUrl + "/view/detail"
+  rootsite = environment.apiUrl;
   //for showing company in details dialog-> needs to be passed from parent
   company!:string;
+  notes!:string;
 
   //to show number of rows/company
   no_of_company!:number;
@@ -103,5 +104,11 @@ i: any;
 
       return (event.order * result);
     });
+  }
+  //For editing notes row
+  onChangingNotes(href:string, $event: any){
+    this.console.log($event);
+    const url = this.rootsite + '/edit/notes?href=' + href + '&value=' +$event.target.value;
+    this._jobService.sendNotes(url);
   }
 }

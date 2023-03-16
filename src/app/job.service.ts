@@ -27,4 +27,7 @@ export class JobService {
     return this.http.get(url,{responseType: 'text'})
                     .pipe(map(res=>res),catchError(this.errorHandler))
   }
+  sendNotes(url:string){
+    return this.http.get(url,{responseType:'text'}).subscribe(console.log);
+  }
 }

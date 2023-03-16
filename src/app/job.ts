@@ -5,6 +5,5 @@ export interface IJob{
     href: "string";
     site: "string";
     title: "string";
-    date: any;
-    
+    crawled_date: any;
 }

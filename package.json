@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "deploy":"npm run build && firebase deploy",
+    "deploy": "npm run build && firebase deploy",
     "start": "ng serve",
     "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "chart.js": "^4.2.1",
     "primeicons": "^6.0.1",
     "primeng": "^15.2.0",
     "rxjs": "~7.8.0",

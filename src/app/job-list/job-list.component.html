@@ -19,6 +19,8 @@
             <th pSortableColumn="crawled_date"><p-sortIcon field="crawled_date'"></p-sortIcon>Date(dd/mm/yyyy)</th>
             <th pSortableColumn="stack">Tech Stack Detected</th>
             <th>Details</th>
+            <th>Search in google for careers page</th>
+            <th>Notes</th>
         </tr>
         <tr>
             <th><p-columnFilter width="50rem" type="text" field="company" ></p-columnFilter></th>
@@ -31,7 +33,8 @@
             </th>
             <th><p-columnFilter type="text" field="techkeywords"></p-columnFilter></th>
             <th>&nbsp;</th>
-        </tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
     </ng-template>
     <ng-template pTemplate="body" let-joblist let-rowIndex="rowIndex">
         <tr>
@@ -72,6 +75,19 @@
             </td>
             <td>
                 <button pButton pRipple type="button" (click)="showDialog(joblist.company, environment.apiUrl + '/view/detail?href=' + joblist.href + '&site=' + joblist.site)" icon="pi pi-external-link" class="p-button-rounded p-button-text"></button>
+            </td>
+            <td>
+                <a href="https://www.google.com/search?q={{joblist.company}}+careers" target="_blank" >Click to search careers</a>
+            </td>
+            <td [pEditableColumn]="joblist.notes" pEditableColumnField="notes">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" required (focusout)="onChangingNotes(joblist.href,$event)" [(ngModel)]="joblist.notes">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{joblist.notes || "Click to add"}}
+                    </ng-template>
+                </p-cellEditor>
             </td>
         </tr>
     </ng-template>
