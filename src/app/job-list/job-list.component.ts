@@ -10,7 +10,7 @@ import { FilterService } from 'primeng/api';
   styleUrls: ['./job-list.component.scss']
 })
 export class JobListComponent {
-i: any;
+  i: any;
   constructor(private _jobService: JobService, private filterService:FilterService){}
   joblist!:IJob[];
   rootsite = environment.apiUrl;

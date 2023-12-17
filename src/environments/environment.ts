@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://crawlapi.onrender.com'
+    apiUrl: 'https://my-app.binsmyth.workers.dev'
 };

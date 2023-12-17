@@ -115,8 +115,14 @@
               "../node_modules/chart.js/dist/chart.js"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "32253f9c-5fe1-410f-92f9-521187297683"
   }
 }
